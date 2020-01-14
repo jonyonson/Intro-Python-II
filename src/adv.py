@@ -53,9 +53,9 @@ player = Player(room['outside'])
 # If the user enters "q", quit the game.
 
 
-def move_direction(dir):
-    if hasattr(player.current_room, dir + '_to'):
-        room = getattr(player.current_room, dir + '_to')
+def move_direction(direction):
+    if hasattr(player.current_room, direction + '_to'):
+        room = getattr(player.current_room, direction + '_to')
         player.current_room = room
     else:
         print("There is no room in that direction")
@@ -68,6 +68,13 @@ while True:
 
     # Print the current room description
     print(f"{player.current_room.description}")
+
+    # Print out all the items that are visible in current room
+    if player.current_room.items:
+        items_string = ", ".join(player.current_room.items)
+        print(f"Items available in room: {items_string}")
+    else:
+        print("No items available in room.")
 
     # Get user input
     cmd = input('> ')
