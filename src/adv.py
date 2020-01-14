@@ -1,5 +1,5 @@
 from room import Room
-
+from player import Player
 # Declare all the rooms
 
 room = {
@@ -38,6 +38,7 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+player = Player(room['outside'])
 
 # Write a loop that:
 #
@@ -52,18 +53,22 @@ room['treasure'].s_to = room['narrow']
 
 
 def move_direction(dir):
-    if dir == 'n':
-        direction = 'north'
-    elif dir == 's':
-        direction = 'south'
-    elif dir == 'e':
-        direction = 'east'
-    elif dir == 'w':
-        direction = 'west'
-    print(f"attempting to move {direction}")
+    if hasattr(player.current_room, dir + '_to'):
+        room = getattr(player.current_room, dir + '_to')
+        player.current_room = room
+    else:
+        print("There is no room in that direction")
 
 
 while True:
+
+    # Print the current room name
+    print(f"{player.current_room.name}")
+
+    # Print the current room description
+    print(f"{player.current_room.description}")
+
+    # Get user input
     cmd = input('> ')
 
     if cmd.lower() in "nesw":
