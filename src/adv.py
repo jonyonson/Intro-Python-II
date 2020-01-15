@@ -70,6 +70,17 @@ def move_direction(direction):
         print("There is no room in that direction")
 
 
+def show_inventory():
+    """ Prints out a players current inventory """
+    if player.inventory:
+        inventory = ""
+        for item in player.inventory:
+            inventory += item.name + " "
+        print(f"Inventory: {inventory}")
+    else:
+        print("You don't have anything in your inventory.")
+
+
 while True:
     # Print the current room name
     print(f"\nRoom: {player.current_room.name}")
@@ -86,19 +97,14 @@ while True:
     else:
         print("No items available in room.")
 
-    # Print out player inventory
-    if player.inventory:
-        inventory = ""
-        for item in player.inventory:
-            inventory += item.name + " "
-        print(f"Inventory: {inventory}")
-
     # Get user input
     cmd = input('> ').lower().split(" ")
 
     if len(cmd) == 1:
         if cmd[0] in "nsew":
             move_direction(cmd[0])
+        elif cmd[0] == "i" or cmd[0] == "inventory":
+            show_inventory()
         elif cmd[0] == "q":
             print("\nThanks for playing!\n")
             break
@@ -109,7 +115,6 @@ while True:
         action = cmd[0]
 
         if action == "get" or action == "take":
-
             if player.current_room.items:
                 for item in player.current_room.items:
                     if cmd[1] == item.name:
@@ -117,7 +122,21 @@ while True:
                         player.current_room.items.remove(item)
                         # add item to player inventory
                         player.inventory.append(item)
+                        item.on_take()
             else:
                 print(f"\nYou can't {action} what is not here.")
+
+        elif action == "drop":
+            if player.inventory:
+                for item in player.inventory:
+                    if cmd[1] == item.name:
+                        # remove item from inventory
+                        player.inventory.remove(item)
+                        # add item to room
+                        player.current_room.items.append(item)
+                        item.on_drop()
+            else:
+                print(f"\nYou can't {action} what you don't have.")
+
         else:
             print("Command not recognized")
