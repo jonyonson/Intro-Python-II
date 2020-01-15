@@ -43,6 +43,14 @@ room['treasure'].s_to = room['narrow']
 # Make a new player object that is currently in the 'outside' room.
 player = Player(room['outside'])
 
+# Add items to the rooms
+bread = Item('bread', 'Much needed energy for the journey')
+room['foyer'].items.append(bread)
+
+beer = Item('beer', 'Much needed courage for the journey')
+room['overlook'].items.append(beer)
+
+
 # Write a loop that:
 #
 # * Prints the current room name
@@ -53,13 +61,6 @@ player = Player(room['outside'])
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
-
-# Add items to the rooms
-bread = Item('bread', 'Much needed energy for the journey')
-room['foyer'].items.append(bread)
-
-beer = Item('beer', 'Much needed courage for the journey')
-room['overlook'].items.append(beer)
 
 
 def move_direction(direction):
