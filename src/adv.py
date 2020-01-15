@@ -64,6 +64,7 @@ room['overlook'].items.append(beer)
 
 
 def move_direction(direction):
+    """ Moves the player to a room if one exists in the given direction """
     if hasattr(player.current_room, direction + '_to'):
         room = getattr(player.current_room, direction + '_to')
         player.current_room = room
