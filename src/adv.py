@@ -53,6 +53,10 @@ room['overlook'].items.append(beer)
 light = LightSource('flashlight', 'A light for a dark world')
 room['foyer'].items.append(light)
 
+# turn off some lights
+room['narrow'].is_light = False
+room['overlook'].is_light = False
+
 
 # Write a loop that:
 #
@@ -88,12 +92,17 @@ def show_inventory():
 
 while True:
 
-    if player.current_room.is_light:
+    inventory_items = [item.name for item in player.inventory]
+    has_flashlight = "flashlight" in inventory_items
+
+    if player.current_room.is_light or has_flashlight:
         # Print the current room name
         print(f"\nRoom: {player.current_room.name}")
+
         # Print the current room description
-        desc = textwrap.fill(text=player.current_room.description, width=80)
-        print(desc)
+        description = textwrap.fill(
+            text=player.current_room.description, width=80)
+        print(description)
 
         # Print out all the items that are visible in current room
         if player.current_room.items:
