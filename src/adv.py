@@ -92,10 +92,12 @@ def show_inventory():
 
 while True:
 
-    inventory_items = [item.name for item in player.inventory]
-    has_flashlight = "flashlight" in inventory_items
+    # inventory_items = [item.name for item in player.inventory]
+    # has_light = "flashlight" in inventory_items
 
-    if player.current_room.is_light or has_flashlight:
+    has_light = any([item.name == "flashlight" for item in player.inventory])
+
+    if player.current_room.is_light or has_light:
         # Print the current room name
         print(f"\nRoom: {player.current_room.name}")
 
