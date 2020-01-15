@@ -78,9 +78,9 @@ def show_inventory():
         inventory = ""
         for item in player.inventory:
             inventory += item.name + " "
-        print(f"Inventory: {inventory}")
+        print(f"\nInventory: {inventory}")
     else:
-        print("You don't have anything in your inventory.")
+        print("\nYou don't have anything in your inventory.")
 
 
 while True:
