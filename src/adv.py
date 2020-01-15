@@ -22,6 +22,13 @@ to north. The smell of gold permeates the air."""),
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
+
+
+    'storage': Room("Storage Room", """You've entered a dark cluttered room.
+Boxes are stacked floor to ceiling."""),
+
+    'library': Room("Library", """Books line the walls in this room. A cigarette
+is still burning in an ash tray on the desk.  Someone was just here.""")
 }
 
 
@@ -35,6 +42,9 @@ room['overlook'].s_to = room['foyer']
 room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
+room['narrow'].e_to = room['library']
+room['library'].n_to = room['storage']
+
 
 #
 # Main
@@ -56,6 +66,7 @@ room['foyer'].items.append(light)
 # turn off some lights
 room['narrow'].is_light = False
 room['overlook'].is_light = False
+room['storage'].is_light = False
 
 
 # Write a loop that:
