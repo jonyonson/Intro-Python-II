@@ -7,3 +7,4 @@ class Room:
         self.name = name
         self.description = description
         self.items = []
+        self.is_light = True

@@ -1,7 +1,7 @@
 import textwrap
 from room import Room
 from player import Player
-from item import Item
+from item import Item, LightSource
 
 # Declare all the rooms
 
@@ -50,6 +50,9 @@ room['foyer'].items.append(bread)
 beer = Item('beer', 'Much needed courage for the journey')
 room['overlook'].items.append(beer)
 
+light = LightSource('flashlight', 'A light for a dark world')
+room['foyer'].items.append(light)
+
 
 # Write a loop that:
 #
@@ -84,20 +87,24 @@ def show_inventory():
 
 
 while True:
-    # Print the current room name
-    print(f"\nRoom: {player.current_room.name}")
-    # Print the current room description
-    description = textwrap.fill(text=player.current_room.description, width=80)
-    print(description)
 
-    # Print out all the items that are visible in current room
-    if player.current_room.items:
-        items = ""
-        for item in player.current_room.items:
-            items += item.name + " "
-        print(f"\nItems available in room: {items}")
+    if player.current_room.is_light:
+        # Print the current room name
+        print(f"\nRoom: {player.current_room.name}")
+        # Print the current room description
+        desc = textwrap.fill(text=player.current_room.description, width=80)
+        print(desc)
+
+        # Print out all the items that are visible in current room
+        if player.current_room.items:
+            items = ""
+            for item in player.current_room.items:
+                items += item.name + " "
+            print(f"\nItems available in room: {items}")
+        else:
+            print("\nNo items available in room.")
     else:
-        print("\nNo items available in room.")
+        print("\nIt's pitch black!")
 
     # Get user input
     cmd = input('> ').lower().split(" ")
