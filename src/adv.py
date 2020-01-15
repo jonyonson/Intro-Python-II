@@ -64,25 +64,41 @@ def move_direction(direction):
 while True:
 
     # Print the current room name
-    print(f"{player.current_room.name}")
+    print(f"\nRoom: {player.current_room.name}")
 
     # Print the current room description
-    print(f"{player.current_room.description}")
+    print(f"Description: {player.current_room.description}")
 
     # Print out all the items that are visible in current room
     if player.current_room.items:
-        items_string = ", ".join(player.current_room.items)
-        print(f"Items available in room: {items_string}")
+        items = ", ".join(player.current_room.items)
+        print(f"Items available in room: {items}")
     else:
         print("No items available in room.")
 
     # Get user input
-    cmd = input('> ')
+    cmd = input('> ').lower().split(" ")
 
-    if cmd.lower() in "nsew":
-        move_direction(cmd.lower())
-    elif cmd.lower() == "q":
-        print("Thanks for playing!")
-        break
-    else:
-        print("Command not recognized")
+    if len(cmd) == 1:
+        if cmd[0] in "nsew":
+            move_direction(cmd[0])
+        elif cmd[0] == "q":
+            print("\nThanks for playing!\n")
+            break
+        else:
+            print("Command not recognized")
+
+    if len(cmd) == 2:
+        action = cmd[0]
+        item = cmd[1]
+
+        if action == "get" or action == "take":
+            if item in player.current_room.items:
+                # remove item from room
+                player.current_room.items.remove(item)
+                # add item to player inventory
+                player.inventory.append(item)
+            else:
+                print(f"\nYou can't {action} what is not here.")
+        else:
+            print("Command not recognized")
