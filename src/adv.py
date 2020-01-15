@@ -1,3 +1,4 @@
+import textwrap
 from room import Room
 from player import Player
 from item import Item
@@ -5,8 +6,8 @@ from item import Item
 # Declare all the rooms
 
 room = {
-    'outside': Room("Outside Cave Entrance",
-                    "North of you, the cave mount beckons"),
+    'outside': Room("Outside Cave Entrance", """North of you, the cave mount
+beckons"""),
 
     'foyer': Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -53,6 +54,7 @@ player = Player(room['outside'])
 #
 # If the user enters "q", quit the game.
 
+# Add items to the rooms
 bread = Item('bread', 'Much needed energy for the journey')
 room['foyer'].items.append(bread)
 
@@ -69,12 +71,11 @@ def move_direction(direction):
 
 
 while True:
-
     # Print the current room name
     print(f"\nRoom: {player.current_room.name}")
-
     # Print the current room description
-    print(f"Description: {player.current_room.description}")
+    description = textwrap.fill(text=player.current_room.description, width=80)
+    print(description)
 
     # Print out all the items that are visible in current room
     if player.current_room.items:
