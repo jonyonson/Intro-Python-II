@@ -28,7 +28,7 @@ earlier adventurers. The only exit is to the south."""),
 Boxes are stacked floor to ceiling."""),
 
     'library': Room("Library", """Books line the walls in this room. A cigarette
-is still burning in an ash tray on the desk.  Someone was just here.""")
+is still burning in an ashtray on the desk.  Someone was just here.""")
 }
 
 
@@ -60,7 +60,7 @@ room['foyer'].items.append(bread)
 beer = Item('beer', 'Much needed courage for the journey.')
 room['overlook'].items.append(beer)
 
-light = LightSource('flashlight', 'A light for a dark world.')
+light = LightSource('lamp', 'A light for a dark world.')
 room['foyer'].items.append(light)
 
 # turn off some lights
@@ -104,9 +104,9 @@ def show_inventory():
 while True:
 
     # inventory_items = [item.name for item in player.inventory]
-    # has_light = "flashlight" in inventory_items
+    # has_light = "lamp" in inventory_items
 
-    has_light = any([item.name == "flashlight" for item in player.inventory])
+    has_light = any([item.name == "lamp" for item in player.inventory])
 
     if player.current_room.is_light or has_light:
         # Print the current room name
