@@ -95,9 +95,9 @@ while True:
         items = ""
         for item in player.current_room.items:
             items += item.name + " "
-        print(f"Items available in room: {items}")
+        print(f"\nItems available in room: {items}")
     else:
-        print("No items available in room.")
+        print("\nNo items available in room.")
 
     # Get user input
     cmd = input('> ').lower().split(" ")
