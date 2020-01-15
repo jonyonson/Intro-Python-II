@@ -23,14 +23,12 @@ to north. The smell of gold permeates the air."""),
 chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 
-
     'storage': Room("Storage Room", """You've entered a dark cluttered room.
 Boxes are stacked floor to ceiling."""),
 
     'library': Room("Library", """Books line the walls in this room. A cigarette
 is still burning in an ashtray on the desk.  Someone was just here.""")
 }
-
 
 # Link rooms together
 
@@ -44,7 +42,6 @@ room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 room['narrow'].e_to = room['library']
 room['library'].n_to = room['storage']
-
 
 #
 # Main
@@ -67,7 +64,6 @@ room['foyer'].items.append(light)
 room['narrow'].is_light = False
 room['overlook'].is_light = False
 room['storage'].is_light = False
-
 
 # Write a loop that:
 #
@@ -102,9 +98,6 @@ def show_inventory():
 
 
 while True:
-
-    # inventory_items = [item.name for item in player.inventory]
-    # has_light = "lamp" in inventory_items
 
     has_light = any([item.name == "lamp" for item in player.inventory])
 
