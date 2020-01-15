@@ -44,13 +44,13 @@ room['treasure'].s_to = room['narrow']
 player = Player(room['outside'])
 
 # Add items to the rooms
-bread = Item('bread', 'Much needed energy for the journey')
+bread = Item('bread', 'Much needed energy for the journey.')
 room['foyer'].items.append(bread)
 
-beer = Item('beer', 'Much needed courage for the journey')
+beer = Item('beer', 'Much needed courage for the journey.')
 room['overlook'].items.append(beer)
 
-light = LightSource('flashlight', 'A light for a dark world')
+light = LightSource('flashlight', 'A light for a dark world.')
 room['foyer'].items.append(light)
 
 # turn off some lights
