@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from item import Item
 
 # Declare all the rooms
 
@@ -52,6 +53,12 @@ player = Player(room['outside'])
 #
 # If the user enters "q", quit the game.
 
+bread = Item('bread', 'Much needed energy for the journey')
+room['foyer'].items.append(bread)
+
+beer = Item('beer', 'Much needed courage for the journey')
+room['overlook'].items.append(beer)
+
 
 def move_direction(direction):
     if hasattr(player.current_room, direction + '_to'):
@@ -71,10 +78,19 @@ while True:
 
     # Print out all the items that are visible in current room
     if player.current_room.items:
-        items = ", ".join(player.current_room.items)
+        items = ""
+        for item in player.current_room.items:
+            items += item.name + " "
         print(f"Items available in room: {items}")
     else:
         print("No items available in room.")
+
+    # Print out player inventory
+    if player.inventory:
+        inventory = ""
+        for item in player.inventory:
+            inventory += item.name + " "
+        print(f"Inventory: {inventory}")
 
     # Get user input
     cmd = input('> ').lower().split(" ")
@@ -90,14 +106,16 @@ while True:
 
     if len(cmd) == 2:
         action = cmd[0]
-        item = cmd[1]
 
         if action == "get" or action == "take":
-            if item in player.current_room.items:
-                # remove item from room
-                player.current_room.items.remove(item)
-                # add item to player inventory
-                player.inventory.append(item)
+
+            if player.current_room.items:
+                for item in player.current_room.items:
+                    if cmd[1] == item.name:
+                        # remove item from room
+                        player.current_room.items.remove(item)
+                        # add item to player inventory
+                        player.inventory.append(item)
             else:
                 print(f"\nYou can't {action} what is not here.")
         else:
