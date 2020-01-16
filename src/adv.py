@@ -137,17 +137,17 @@ while True:
         # Print out all the items that are visible in current room
         if player.current_room.items:
             items = ", ".join([i.name for i in player.current_room.items])
-            print(f"\nItems available in room: {items}")
+            print(f"\nItems available in room: {items}\n")
             print("============================================")
         else:
-            print("\nThere are no items available for you here")
+            print("\nThere are no items available for you here\n")
             print("============================================")
     else:
-        print("\nIt's pitch black!")
+        print("\nIt's pitch black\n")
         print("============================================")
 
     # Get user input
-    cmd = input('--> ').lower().split(" ")
+    cmd = input('\n--> ').lower().split(" ")
 
     if len(cmd) == 1:
         if cmd[0] in "nsew":
