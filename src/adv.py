@@ -97,12 +97,29 @@ def show_inventory():
         print("\nYou don't have anything in your inventory.")
 
 
+def show_commands():
+    print("\n================= COMMANDS =================")
+    print("n - move north")
+    print("s - move south")
+    print("e - move east")
+    print("w - move west")
+    print("q - quit game")
+    print("i - show player inventory")
+    print("h - show this menu")
+    print("\nget <item> - pick up an avalable item")
+    print("drop <item> - drop an item in your inventory")
+    print("============================================")
+
+
+show_commands()
+
 while True:
 
     has_light = any([item.name == "lamp" for item in player.inventory])
 
     if player.current_room.is_light or has_light:
         # Print the current room name
+        # print("============================================\n")
         print(f"\nRoom: {player.current_room.name}")
 
         # Print the current room description
@@ -112,23 +129,26 @@ while True:
 
         # Print out all the items that are visible in current room
         if player.current_room.items:
-            items = ""
-            for item in player.current_room.items:
-                items += item.name + " "
+            items = ", ".join([i.name for i in player.current_room.items])
             print(f"\nItems available in room: {items}")
+            print("============================================")
         else:
-            print("\nNo items available in room.")
+            print("\nNo items available in this room")
+            print("============================================")
     else:
         print("\nIt's pitch black!")
+        print("============================================")
 
     # Get user input
-    cmd = input('> ').lower().split(" ")
+    cmd = input('--> ').lower().split(" ")
 
     if len(cmd) == 1:
         if cmd[0] in "nsew":
             move_direction(cmd[0])
         elif cmd[0] == "i" or cmd[0] == "inventory":
             show_inventory()
+        elif cmd[0] == "h":
+            show_commands()
         elif cmd[0] == "q":
             print("\nThanks for playing!\n")
             break
