@@ -1,4 +1,5 @@
 import textwrap
+from os import system, name
 from room import Room
 from player import Player
 from item import Item, LightSource
@@ -77,6 +78,15 @@ room['storage'].is_light = False
 # If the user enters "q", quit the game.
 
 
+def clear():
+    if name == 'nt':
+        # for windows
+        _ = system('cls')
+    else:
+        # for mac and linux(here, os.name is 'posix')
+        _ = system('clear')
+
+
 def move_direction(direction):
     """ Moves the player to a room if one exists in the given direction """
     if hasattr(player.current_room, direction + '_to'):
@@ -92,10 +102,11 @@ def show_inventory():
         inventory = ", ".join([i.name for i in player.inventory])
         print(f"\nInventory: {inventory}")
     else:
-        print("\nYou don't have anything in your inventory.")
+        print("\nYou don't have any items in your inventory")
 
 
 def show_commands():
+    clear()
     print("\n================= COMMANDS =================")
     print("n - move north")
     print("s - move south")
@@ -112,7 +123,6 @@ def show_commands():
 show_commands()
 
 while True:
-
     has_light = any([item.name == "lamp" for item in player.inventory])
 
     if player.current_room.is_light or has_light:
@@ -130,7 +140,7 @@ while True:
             print(f"\nItems available in room: {items}")
             print("============================================")
         else:
-            print("\nThere are no items available for you in this room")
+            print("\nThere are no items available for you here")
             print("============================================")
     else:
         print("\nIt's pitch black!")
@@ -146,6 +156,8 @@ while True:
             show_inventory()
         elif cmd[0] == "h":
             show_commands()
+        elif cmd[0] == "clear":
+            clear()
         elif cmd[0] == "q":
             print("\nThanks for playing!\n")
             break
