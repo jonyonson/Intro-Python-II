@@ -89,9 +89,7 @@ def move_direction(direction):
 def show_inventory():
     """ Prints out a players current inventory """
     if player.inventory:
-        inventory = ""
-        for item in player.inventory:
-            inventory += item.name + " "
+        inventory = ", ".join([i.name for i in player.inventory])
         print(f"\nInventory: {inventory}")
     else:
         print("\nYou don't have anything in your inventory.")
@@ -119,13 +117,12 @@ while True:
 
     if player.current_room.is_light or has_light:
         # Print the current room name
-        # print("============================================\n")
-        print(f"\nRoom: {player.current_room.name}")
+        print(f"\n{player.current_room.name}")
 
         # Print the current room description
         description = textwrap.fill(
             text=player.current_room.description, width=80)
-        print(description)
+        print(f"\n{description}")
 
         # Print out all the items that are visible in current room
         if player.current_room.items:
@@ -133,7 +130,7 @@ while True:
             print(f"\nItems available in room: {items}")
             print("============================================")
         else:
-            print("\nNo items available in this room")
+            print("\nThere are no items available for you in this room")
             print("============================================")
     else:
         print("\nIt's pitch black!")
