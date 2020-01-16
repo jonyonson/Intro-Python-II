@@ -42,7 +42,9 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 room['narrow'].e_to = room['library']
+room['library'].w_to = room['narrow']
 room['library'].n_to = room['storage']
+room['storage'].s_to = room['library']
 
 #
 # Main
@@ -52,11 +54,14 @@ room['library'].n_to = room['storage']
 player = Player(room['outside'])
 
 # Add items to the rooms
-bread = Item('bread', 'Much needed energy for the journey.')
+bread = Item('sandwich', 'Much needed energy for the journey.')
 room['foyer'].items.append(bread)
 
 beer = Item('beer', 'Much needed courage for the journey.')
 room['overlook'].items.append(beer)
+
+book = Item('book', 'This is the book of secrets you are looking for.')
+room['library'].items.append(book)
 
 light = LightSource('lamp', 'A light for a dark world.')
 room['foyer'].items.append(light)

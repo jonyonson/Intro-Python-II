@@ -7,7 +7,7 @@ class Item:
         return self.name
 
     def on_take(self):
-        print(f"\nYou have picked up {self.name}. {self.description}")
+        print(f"\nYou have picked up a {self.name}. {self.description}")
 
     def on_drop(self):
         print(f"\nYou have dropped {self.name}")
